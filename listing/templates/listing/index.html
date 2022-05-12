@@ -1,0 +1,34 @@
+{% extends 'listing/base.html' %}
+{% block content %}
+
+<div>
+<form action="{% url 'index' %}" class="form-inline my-2 my-lg-0" method="POST">
+    {% csrf_token %}
+      <input class="form-control mr-sm-2" type="search" placeholder="Get Stocks" aria-label="Search" name='entity1'>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Go</button>
+</form>
+</div>
+<br/>
+<br/>
+
+
+{% if entity %}
+	{{ entity }}
+{% endif %}
+
+{% if api %}
+	{% if api == 'Error...' %}
+		There was an error, please check your search query.
+	{% else %}
+		<h1>{{ api.companyName }}</h1><br/>
+		Price: ${{ api.latestPrice }}<br/>
+		Previous Close: {{ api.previousClose }}<br/>
+		Market Cap: {{ api.marketCap }}<br/>
+		YTD Change: {{ api.ytdChange }}<br/>
+		52Wk High: {{ api.week52High }}<br/>
+		52Wk Low: {{ api.week52Low }}<br/>
+		
+	{% endif %}
+{% endif %}
+
+{% endblock %}

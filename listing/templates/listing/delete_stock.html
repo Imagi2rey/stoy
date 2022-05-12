@@ -1,0 +1,14 @@
+{% extends 'listing/base.html' %}
+{% block content %}
+
+<h1> Delete Stock </h1>
+<br/>
+<br/>
+{% if entity %}
+	{% for item in entity %}
+		<a href="{% url 'delete' item.id %}" class="btn btn-secondary">{{ item }}</a><br/><br/>
+	{% endfor %}
+{%else%}
+	No stocks left...
+{% endif %}
+{% endblock %}
